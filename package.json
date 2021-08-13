@@ -4,6 +4,7 @@
   "description": "Trackers your workouts ",
   "main": "index.js",
   "scripts": {
+    "seed": "node seeders/seed.js",
     "test": "npm test"
   },
   "repository": {
