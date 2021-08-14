@@ -12,12 +12,12 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  db.Workout.find()
+  db.Stats()
     .then((dbData) => {
       res.json(dbData);
     })
     .catch((err) => {
-      res.json(err);
+      res.json({ err: JSON.stringify(err) });
     });
 });
 

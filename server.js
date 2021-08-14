@@ -14,17 +14,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost:27017/workouttracker",
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//   }
-// );
-
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workouttracker",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/workouttracker",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -32,6 +23,16 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
+
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://localhost/workouttracker",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   }
+// );
 
 app.use(require("./routes/api-routes.js"));
 app.use(require("./routes/html-routes.js"));

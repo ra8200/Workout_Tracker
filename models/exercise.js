@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({
@@ -39,5 +38,15 @@ const WorkoutSchema = new Schema({
   ],
 });
 
+function workoutStats() {
+  return Workout.aggregate([{ $match: {} }])
+    .addFields({
+      totalWeight: { $sum: "$exercises.weight" },
+      totalDuration: { $sum: "$exercises.Duration" },
+    })
+    .sort({ day: -1 })
+    .limit(7);
+}
+
 const Workout = mongoose.model("Workout", WorkoutSchema);
-module.exports = { Workout: Workout };
+module.exports = { Workout: Workout, Stats: workoutStats };
