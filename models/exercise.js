@@ -42,7 +42,7 @@ function workoutStats() {
   return Workout.aggregate([{ $match: {} }])
     .addFields({
       totalWeight: { $sum: "$exercises.weight" },
-      totalDuration: { $sum: "$exercises.Duration" },
+      totalDuration: { $sum: "$exercises.duration" },
     })
     .sort({ day: -1 })
     .limit(7);
