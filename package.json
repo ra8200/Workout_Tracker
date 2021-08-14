@@ -1,12 +1,16 @@
 {
   "name": "workout-tracker",
   "version": "1.0.0",
-  "description": "Trackers your workouts ",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "seed": "node seeders/seed.js",
-    "test": "npm test"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "seed": "node seeders/seed.js"
   },
+
+
   "repository": {
     "type": "git",
     "url": "y"
@@ -14,3 +18,4 @@
   "author": "Razi Alawamleh",
   "license": "MIT"
 }
+
