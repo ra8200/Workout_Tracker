@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:3000/workouttracker",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/workouttracker",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
