@@ -9,8 +9,6 @@
     "watch": "nodemon server.js",
     "seed": "node seeders/seed.js"
   },
-
-
   "repository": {
     "type": "git",
     "url": "y"
@@ -18,4 +16,3 @@
   "author": "Razi Alawamleh",
   "license": "MIT"
 }
-
