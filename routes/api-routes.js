@@ -22,10 +22,9 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-  db.create
-    .findByIdAndUpdate(params.id, {
-      $push: { exercises: body },
-    })
+  db.findByIdAndUpdate(params.id, {
+    $push: { exercises: body },
+  })
     .then((dbData) => {
       res.json(dbData);
     })
