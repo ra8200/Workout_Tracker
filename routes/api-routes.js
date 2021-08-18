@@ -1,18 +1,21 @@
 const router = require("express").Router();
-const db = require("../models/exercise");
+const db = require("../models/exercise.js");
 
 router.get("/api/workouts", (req, res) => {
-  db.Workout.find({})
+  db.Workout.aggregate([
+    { $addFields: { totalDuration: { $sum: "$exercises.duration" } } },
+  ])
+    .sort({ day: 1 })
     .then((dbData) => {
       res.json(dbData);
     })
     .catch((err) => {
-      res.json(err);
+      res.json({ err: JSON.stringify(err) });
     });
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  db.Stats()
+  db.Workout.Stats()
     .then((dbData) => {
       res.json(dbData);
     })
@@ -22,19 +25,28 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 router.put("/api/workouts/:id", ({ body, params }, res) => {
-  db.findByIdAndUpdate(params.id, {
-    $push: { exercises: body },
-  })
-    .then((dbData) => {
-      res.json(dbData);
+  if (body.name != "") {
+    db.Workout.findByIdAndUpdate(params.id, {
+      $push: { exercises: body },
+    })
+      .then((dbData) => {
+        res.json(dbData);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  } else return;
+});
+
+router.post("/api/workouts", (/*{ body, params }*/ req, res) => {
+  // db.create({}, (err, req) => res.json(err ? err : req));
+  db.Workout.create({})
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
     })
     .catch((err) => {
       res.json(err);
     });
-});
-
-router.post("/api/workouts", (/*{ body, params }*/ req, res) => {
-  db.create({}, (err, req) => res.json(err ? err : req));
 });
 
 module.exports = router;
